@@ -22,6 +22,11 @@ import type {
 } from './types';
 
 export class Framework {
+  /**
+   * Ioc 层次结构
+   *
+   * <scope , <identifier , <variant , serverInstance>>>
+   */
   private readonly components: Map<
     string,
     Map<string, Map<ComponentVariant, ComponentFactory>>
@@ -478,6 +483,9 @@ class FrameworkEditor {
 
 /**
  * Convert dependencies definition to a factory function.
+ * 将 deps 的依赖 注入到 cls 的构造函数参数内
+ *
+ * new cls(...deps)
  */
 function dependenciesToFactory(
   cls: any,

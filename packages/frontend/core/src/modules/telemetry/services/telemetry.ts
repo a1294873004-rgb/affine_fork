@@ -73,6 +73,8 @@ export class TelemetryService extends Service {
   }
 
   onApplicationStart() {
+    console.log('fuck TelemetryService');
+
     this.registerMiddlewares();
   }
 

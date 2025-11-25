@@ -86,6 +86,16 @@ export const Component = ({
       .catch(err => console.error('Failed to create cloud workspace', err));
   }, [defaultIndexRoute, jumpToPage, openPage, workspacesService]);
 
+  console.log(
+    'fuck index layout',
+    enableLocalWorkspace,
+    list,
+    Object.fromEntries(searchParams.entries()),
+    listIsLoading,
+    loggedIn,
+    navigating,
+    defaultIndexRoute
+  );
   useLayoutEffect(() => {
     if (!navigating) {
       return;
@@ -125,6 +135,7 @@ export const Component = ({
       const lastId = localStorage.getItem('last_workspace_id');
 
       const openWorkspace = list.find(w => w.id === lastId) ?? list[0];
+      console.log('fuck open');
       openPage(openWorkspace.id, defaultIndexRoute, RouteLogic.REPLACE);
     }
   }, [
@@ -142,6 +153,7 @@ export const Component = ({
 
   const desktopApi = useServiceOptional(DesktopApiService);
 
+  console.log('fuck desktopApi', loggedIn, desktopApi);
   useEffect(() => {
     desktopApi?.handler.ui.pingAppLayoutReady().catch(console.error);
   }, [desktopApi]);

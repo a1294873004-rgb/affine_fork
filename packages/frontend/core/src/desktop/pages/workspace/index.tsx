@@ -217,6 +217,7 @@ export const Component = (): ReactElement => {
     return <AppContainer fallback />;
   }
 
+  console.log('fuck render workspace', meta);
   return (
     <FrameworkScope scope={server?.scope}>
       <WorkspacePage meta={meta} />

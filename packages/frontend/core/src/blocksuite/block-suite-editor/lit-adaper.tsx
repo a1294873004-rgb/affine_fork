@@ -332,6 +332,7 @@ export const BlocksuiteEdgelessEditor = forwardRef<
     }
   }, []);
 
+  console.log('fuck canvas lit 组件', page, specs, portals);
   return (
     <div className={styles.affineEdgelessDocViewport}>
       <LitEdgelessEditor ref={onDocRef} doc={page} specs={specs} />

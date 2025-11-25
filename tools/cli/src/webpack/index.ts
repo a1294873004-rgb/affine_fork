@@ -42,12 +42,15 @@ function getBuildConfigFromEnv(pkg: Package) {
   });
 }
 
+console.log('fuck webpack config');
+
 export function createHTMLTargetConfig(
   pkg: Package,
   entry: string | Record<string, string>,
   htmlConfig: Partial<CreateHTMLPluginConfig> = {},
   deps?: string[]
 ): webpack.Configuration {
+  console.log('fuck run webpack config');
   entry = typeof entry === 'string' ? { index: entry } : entry;
 
   htmlConfig = merge(

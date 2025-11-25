@@ -60,7 +60,10 @@ export class BlockStdScope {
   readonly userExtensions: ExtensionType[];
 
   private get _lifeCycleWatchers() {
-    return this.provider.getAll(LifeCycleWatcherIdentifier);
+    const allData = this.provider.getAll(LifeCycleWatcherIdentifier);
+    console.log('fuck _lifeCycleWatchers', allData);
+    return allData;
+    // return this.provider.getAll(LifeCycleWatcherIdentifier);
   }
 
   private _host!: EditorHost;
@@ -111,7 +114,7 @@ export class BlockStdScope {
   get selection() {
     return this.get(StoreSelectionExtension);
   }
-
+  // fuck view ，canvas 视图
   get view() {
     return this.get(ViewStore);
   }
@@ -119,9 +122,18 @@ export class BlockStdScope {
   constructor(options: BlockStdOptions) {
     this.store = options.store;
     this.userExtensions = options.extensions;
+    // DI 管理器
     this.container = new Container();
     this.container.addImpl(StdIdentifier, () => this);
 
+    console.log(
+      'fuck BlockStdScope constructor internalExtensions',
+      internalExtensions
+    );
+    console.log(
+      'fuck BlockStdScope constructor userExtensions',
+      this.userExtensions
+    );
     internalExtensions.forEach(ext => {
       const container = this.container;
       ext.setup(container);

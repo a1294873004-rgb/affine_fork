@@ -2,6 +2,11 @@ import type { Constructor } from '@blocksuite/global/utils';
 import type { CSSResultGroup, CSSResultOrNative } from 'lit';
 import { CSSResult, LitElement } from 'lit';
 
+/**
+ * 1. 禁用 Lit 的 shadow DOM（真正意义上的“shadowless”）
+ * 2. 收集（获取） static styles，但不放到 shadow root，而是放到全局 document.head
+ * 3. 如果组件被放到某个 ShadowRoot 内，动态把 styles 注入该 ShadowRoot
+ */
 export class ShadowlessElement extends LitElement {
   // Map of the number of styles injected into a node
   // A reference count of the number of ShadowlessElements that are still connected
@@ -15,6 +20,10 @@ export class ShadowlessElement extends LitElement {
     WeakMap<Node, (() => void) | null>
   >();
 
+  // Lit 会在 组件类第一次被定义时 调用：customElements.define('my-element', MyElement);
+  // 只执行一次。不是在 render() 时！
+  // 不只是收集，而是把组件的 styles 主动变成全局样式，并注入到 document.head 里。
+  // 返回每个 class 的 static styles
   // styles registered in ShadowlessElement will be available globally
   // even if the element is not being rendered
   protected static override finalizeStyles(
@@ -76,7 +85,7 @@ export class ShadowlessElement extends LitElement {
     }
     this.setConnectedCount(styleInjectedCount + 1);
   }
-
+  // 这行代码就是让 Lit 不创建 ShadowRoot，改为直接把内容渲染在 light DOM，所以叫 ShadowlessElement。
   override createRenderRoot() {
     return this;
   }

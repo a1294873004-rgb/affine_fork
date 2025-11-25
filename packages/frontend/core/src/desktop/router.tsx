@@ -185,6 +185,7 @@ export const topLevelRoutes = [
 const createBrowserRouter = wrapCreateBrowserRouterV6(
   reactRouterCreateBrowserRouter
 );
+console.log('fuck  window.SENTRY_RELEASE === false', window.SENTRY_RELEASE);
 export const router = (
   window.SENTRY_RELEASE ? createBrowserRouter : reactRouterCreateBrowserRouter
 )(topLevelRoutes, {

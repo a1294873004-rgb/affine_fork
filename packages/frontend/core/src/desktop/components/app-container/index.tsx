@@ -93,6 +93,7 @@ const BrowserLayout = ({
   const workspaceService = useServiceOptional(WorkspaceService);
   const isInWorkspace = !!workspaceService;
 
+  console.log('fuck BrowserLayout', fallback, isInWorkspace);
   return (
     <div className={styles.browserAppViewContainer}>
       <OpenInAppCard />

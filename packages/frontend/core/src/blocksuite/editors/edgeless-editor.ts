@@ -5,7 +5,17 @@ import type { ExtensionType, Store } from '@blocksuite/affine/store';
 import { css, html, nothing, type TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { guard } from 'lit/directives/guard.js';
+/**
+ * requestUpdate() 
+   └─> 标记 isUpdatePending = true
+   └─> 异步调度更新队列 (Promise.resolve / microtask)
+        └─> 调用 performUpdate()
+             ├─> 调用 willUpdate(changedProperties)
+             ├─> 调用 render() -> html`...` 模板
+             ├─> 更新 DOM（diff/patch）
+             └─> 调用 updated(changedProperties)
 
+ */
 export class EdgelessEditor extends SignalWatcher(
   WithDisposable(ShadowlessElement)
 ) {
@@ -42,7 +52,7 @@ export class EdgelessEditor extends SignalWatcher(
       return null;
     }
   }
-
+  // 对应 react ： componentDidMount
   override connectedCallback() {
     super.connectedCallback();
     this._disposables.add(
@@ -65,13 +75,15 @@ export class EdgelessEditor extends SignalWatcher(
 
     const std = this.std;
     const theme = std.get(ThemeProvider).edgeless$.value;
+    // std 依赖修改之后 重新render
+    // guard(dependencies: unknown[], fn: () => TemplateResult): TemplateResult
     return html`
       <div class="affine-edgeless-viewport" data-theme=${theme}>
         ${guard([std], () => std.render())}
       </div>
     `;
   }
-
+  // 对应 react componentWillUpdate
   override willUpdate(
     changedProperties: Map<string | number | symbol, unknown>
   ) {
@@ -86,7 +98,9 @@ export class EdgelessEditor extends SignalWatcher(
       });
     }
   }
-
+  // this.doc 修改属性 会导致lit 组件更新:update() -> render() -> updated()
+  // attribute: false 不映射成 dom 属性
+  // accessor doc!: Store; ts写法生成 ： private _doc: Store; get doc() { return this._doc; } set doc(v) { this._doc = v; }
   @property({ attribute: false })
   accessor doc!: Store;
 
@@ -95,7 +109,7 @@ export class EdgelessEditor extends SignalWatcher(
 
   @property({ attribute: false })
   accessor specs: ExtensionType[] = [];
-
+  // 内部属性，不能从外部传递，但是修改也会导致更新
   @state()
   accessor std!: BlockStdScope;
 }

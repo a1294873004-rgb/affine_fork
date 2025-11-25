@@ -231,6 +231,24 @@ const setProperty = <E extends Element>(
  * messages. Default value is inferred from the name of custom element class
  * registered via `customElements.define`.
  */
+
+/**
+ * ==========================================
+ * React 封装 Lit 组件示例：LitEdgelessEditor
+ * ==========================================
+ *
+ * 背景：
+ *  - EdgelessEditor 是一个 Lit Web Component（Shadowless + SignalWatcher + WithDisposable）。
+ *  - 我们希望在 React 中使用它，并且能够通过 React props 更新 Lit 属性，同时绑定事件。
+ *
+ * 核心思路：
+ *  1. 使用 createReactComponentFromLit 将 Lit 组件包装成 React 组件。
+ *  2. React props 被映射到 Lit 属性上。
+ *  3. Lit 组件内部逻辑保持原样：
+ *     - SignalWatcher：监听 Preact 信号，自动触发更新。
+ *     - WithDisposable：管理生命周期内的资源清理。
+ *     - ShadowlessElement：不使用 Shadow DOM，样式注入到全局 <head>。
+ */
 export const createComponent = <
   I extends HTMLElement,
   E extends EventNames = EmptyObject,

@@ -52,7 +52,7 @@ export const PageDetailEditor = ({
   useEffect(() => {
     editor.doc.blockSuiteDoc.readonly = readonly ?? false;
   }, [editor, readonly]);
-
+  console.log('fuck page canvas 编辑器', mode);
   return (
     <BlockSuiteEditor
       className={clsx(styles.editor, {

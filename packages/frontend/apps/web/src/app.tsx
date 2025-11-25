@@ -90,6 +90,7 @@ const frameworkProvider = framework.provider();
 window.addEventListener('focus', () => {
   frameworkProvider.get(LifecycleService).applicationFocus();
 });
+// frameworkProvider.get(LifecycleService) === class LifecycleService
 frameworkProvider.get(LifecycleService).applicationStart();
 
 export function App() {

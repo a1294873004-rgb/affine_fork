@@ -158,6 +158,7 @@ const WorkbenchSidebar = () => {
     setWidth(sidebarWidth ?? 0);
   }, [resizing, sidebarWidth]);
 
+  console.log('fuck views', views);
   return (
     <ResizePanel
       floating={floating}

@@ -241,6 +241,7 @@ const BlockSuiteEditorImpl = ({
       disposableGroup.dispose();
     };
   }, [affineEditorContainerProxy, onEditorReady, page, server]);
+  console.log('fuck page canvas 编辑器2', mode);
 
   return (
     <div
@@ -363,6 +364,7 @@ export const BlockSuiteEditor = (props: EditorProps) => {
         });
       });
   }, [loadStartTime, props.page, workspaceService]);
+  console.log('fuck page canvas 编辑器1');
 
   return (
     <Slot style={{ '--affine-font-family': fontFamily } as CSSProperties}>

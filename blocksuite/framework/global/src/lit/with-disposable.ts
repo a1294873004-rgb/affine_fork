@@ -27,6 +27,13 @@ export declare class DisposableClass {
  * }
  * ```
  */
+
+/**
+ * 
+给类增加 _disposables 属性（一个 DisposableGroup），方便存放需要释放的资源。
+
+在组件卸载（disconnectedCallback）时自动调用 _disposables.dispose()，释放里面所有资源，避免内存泄漏或悬空回调。
+ */
 export function WithDisposable<T extends Constructor<LitElement>>(
   SuperClass: T
 ) {

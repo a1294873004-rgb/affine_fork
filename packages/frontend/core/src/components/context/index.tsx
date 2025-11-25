@@ -9,7 +9,19 @@ import { useMemo } from 'react';
 export type AffineContextProps = PropsWithChildren<{
   store?: ReturnType<typeof createStore>;
 }>;
+/**
+返回
 
+<Provider store={store}>
+  <ThemeProvider>
+    <ConfirmModalProvider>
+      <PromptModalProvider>
+        {props.children}
+      </PromptModalProvider>
+    </ConfirmModalProvider>
+  </ThemeProvider>
+</Provider>
+ */
 export function AffineContext(props: AffineContextProps) {
   return (
     <ProviderComposer

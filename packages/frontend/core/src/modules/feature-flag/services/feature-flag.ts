@@ -9,6 +9,8 @@ export class FeatureFlagService extends Service {
   flags = this.framework.createEntity(Flags) as FlagsExt;
 
   setupRestartListener() {
+    console.log('fuck FeatureFlagService');
+
     this.flags.enable_ai.$.pipe(distinctUntilChanged(), skip(1)).subscribe(
       () => {
         // when enable_ai flag changes, reload the page.

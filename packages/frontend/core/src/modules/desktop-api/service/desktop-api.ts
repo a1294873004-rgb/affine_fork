@@ -53,6 +53,8 @@ export class DesktopApiService extends Service {
   }
 
   private setupStartListener() {
+    // fuck桌面 web 不使用
+    console.log('fuck DesktopApiService');
     this.setupCommonUIEvents();
     this.setupAuthRequestEvent();
   }

@@ -157,6 +157,7 @@ export function NormalPageHeader({ page, workspace }: PageHeaderProps) {
     <Header className={styles.header} ref={containerRef}>
       <ViewTitle title={title} />
       <ViewIcon icon={currentMode ?? 'page'} />
+      {/* fuck 编辑修改 page 模式 和 canvas 模式 */}
       <EditorModeSwitch />
       <BlocksuiteHeaderTitle inputHandleRef={titleInputHandleRef} />
       <TemplateMark />

@@ -25,5 +25,6 @@ export const LitEdgelessEditor = createReactComponentFromLit({
 
 export function editorEffects() {
   customElements.define('page-editor', PageEditor);
+  //  注册自定义元素 ,，否则 <edgeless-editor> 无法使用
   customElements.define('edgeless-editor', EdgelessEditor);
 }

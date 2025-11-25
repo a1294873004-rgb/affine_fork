@@ -78,6 +78,7 @@ export class Server extends Entity<{
           count: Infinity,
         }),
         tap(config => {
+          console.log('fuck updateServerConfig', config);
           this.serverListStore.updateServerConfig(this.serverMetadata.id, {
             credentialsRequirement: config.credentialsRequirement,
             features: config.features,
