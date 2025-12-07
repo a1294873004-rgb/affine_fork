@@ -89,6 +89,7 @@ export class WorkspaceRepositoryService extends Service {
     logger.info(
       `open workspace [${openOptions.metadata.flavour}] ${openOptions.metadata.id} `
     );
+    // fuck LocalWorkspaceFlavourProvider === flavourProvider
     const flavourProvider = this.flavoursService.flavours$.value.find(
       p => p.flavour === openOptions.metadata.flavour
     );

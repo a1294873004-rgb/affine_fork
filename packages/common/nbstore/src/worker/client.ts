@@ -48,7 +48,92 @@ export class StoreManagerClient {
 
     const client = new OpClient<WorkerOps>(port1);
     const closeKey = uuid();
-
+//    const message {
+//     "type": "call",
+//     "id": "open:1",
+//     "name": "open",
+//     "payload": {
+//         "key": "workspace:local:_JObMxdXkmGa9vobk1PNE",
+//         "closeKey": "259b6771-6ef1-428c-a7cf-93388c59acf8",
+//         "options": {
+//             "local": {
+//                 "doc": {
+//                     "name": "IndexedDBDocStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "blob": {
+//                     "name": "IndexedDBBlobStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "blobSync": {
+//                     "name": "IndexedDBBlobSyncStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "docSync": {
+//                     "name": "IndexedDBDocSyncStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "awareness": {
+//                     "name": "BroadcastChannelAwarenessStorage",
+//                     "opts": {
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "indexer": {
+//                     "name": "IndexedDBIndexerStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 },
+//                 "indexerSync": {
+//                     "name": "IndexedDBIndexerSyncStorage",
+//                     "opts": {
+//                         "flavour": "local",
+//                         "type": "workspace",
+//                         "id": "_JObMxdXkmGa9vobk1PNE"
+//                     }
+//                 }
+//             },
+//             "remotes": {
+//                 "v1": {
+//                     "doc": {
+//                         "name": "IndexedDBV1DocStorage",
+//                         "opts": {
+//                             "id": "_JObMxdXkmGa9vobk1PNE",
+//                             "type": "workspace"
+//                         }
+//                     },
+//                     "blob": {
+//                         "name": "IndexedDBV1BlobStorage",
+//                         "opts": {
+//                             "id": "_JObMxdXkmGa9vobk1PNE",
+//                             "type": "workspace"
+//                         }
+//                     }
+//                 }
+//             }
+//         },
+//         "port": {}
+//     }
+// }
     this.client
       .call(
         'open',

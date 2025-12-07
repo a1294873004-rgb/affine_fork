@@ -19,7 +19,7 @@ import { Framework, FrameworkRoot, getCurrentStore } from '@toeverything/infra';
 import { OpClient } from '@toeverything/infra/op';
 import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
-
+// fuck init app
 const cache = createEmotionCache();
 
 let storeManagerClient: StoreManagerClient;
@@ -62,6 +62,7 @@ configureLocalStorageStateStorageImpls(framework);
 configureBrowserWorkspaceFlavours(framework);
 framework.impl(NbstoreProvider, {
   openStore(key, options) {
+    // fuck const { store, dispose } = this.nbstoreService.openStore
     return storeManagerClient.open(key, options);
   },
 });
