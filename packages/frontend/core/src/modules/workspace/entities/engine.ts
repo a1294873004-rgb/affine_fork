@@ -13,6 +13,10 @@ export class WorkspaceEngine extends Entity<{
   isSharedMode?: boolean;
   engineWorkerInitOptions: WorkerInitOptions;
 }> {
+  /**
+   *  返回 work send 的 call 接口 store 存储逻辑
+   * client === worker 存储逻辑 nbstore.worker.js
+   */
   client?: StoreClient;
   started = false;
 
@@ -57,7 +61,7 @@ export class WorkspaceEngine extends Entity<{
       throw new Error('Engine is already started');
     }
     this.started = true;
-
+    // 返回 work send 的 call 接口 store 存储逻辑
     const { store, dispose } = this.nbstoreService.openStore(
       (this.props.isSharedMode ? 'shared:' : '') +
         `workspace:${this.workspaceService.workspace.flavour}:${this.workspaceService.workspace.id}`,

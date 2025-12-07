@@ -27,6 +27,7 @@ import type { WorkspaceService } from '../../workspace';
 import { EditorScope } from '../scopes/editor';
 import type { EditorSelector } from '../types';
 
+// fuck 编辑器 data
 export class Editor extends Entity {
   readonly scope = this.framework.createScope(EditorScope, {
     editor: this as Editor,

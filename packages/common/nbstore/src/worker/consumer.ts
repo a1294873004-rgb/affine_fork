@@ -352,6 +352,7 @@ export class StoreManagerConsumer {
       open: ({ port, key, closeKey, options }) => {
         console.debug('open store', key, closeKey);
         let storeRef = this.storePool.get(key);
+        console.log("fuck worker",{ port, key, closeKey, options } , !!storeRef)
 
         if (!storeRef) {
           const store = new StoreConsumer(
