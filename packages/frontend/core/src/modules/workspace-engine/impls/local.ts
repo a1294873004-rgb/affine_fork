@@ -207,6 +207,12 @@ class LocalWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
     new Observable<WorkspaceMetadata[]>(subscriber => {
       let last: WorkspaceMetadata[] | null = null;
       const emit = () => {
+      // value =  [
+      //       {
+      //           "id": "_JObMxdXkmGa9vobk1PNE",
+      //           "flavour": "local"
+      //       }
+      //   ]
         const value = getLocalWorkspaceIds().map(id => ({
           id,
           flavour: 'local',

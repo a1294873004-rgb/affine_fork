@@ -85,6 +85,19 @@ const logger = new DebugLogger('livedata');
  * @see {@link https://rxjs.dev/api/index/class/BehaviorSubject}
  * @see {@link https://developer.android.com/topic/libraries/architecture/livedata}
  */
+
+/**
+ * LiveData：一个带“最新值”的响应式数据容器
+ *
+ * 功能类似 BehaviorSubject，但更强大：
+ * 1. 内部保存一个最新值（snapshot）
+ * 2. 支持被订阅（watch）时才启动数据源（upstream）
+ * 3. 没有订阅者（unwatch）时自动停止 upstream（节省性能）
+ * 4. 支持 computed（自动依赖跟踪）
+ * 5. 支持 flat()（数组或 LiveData 嵌套自动展开）
+ *
+ * 常用于：派生状态、响应式组合、应用级状态管理
+ */
 export class LiveData<T = unknown>
   extends Observable<T>
   implements InteropObservable<T>

@@ -105,9 +105,23 @@ export const Component = (): ReactElement => {
 
   const [workspaceNotFound, setWorkspaceNotFound] = useState(false);
   const listLoading = useLiveData(workspacesService.list.isRevalidating$);
+  // fuck react open workspace init 数据1
+  // fuck workspacesService.list === WorkspacesService.list
+  // fuck list === this.listService.list
+  // workspacesService.list.workspaces$ === flavour.workspaces$.workspaceFlavours$
+  // flavour.workspaces$ = [LocalWorkspaceFlavoursProvider.workspaces$ , CloudWorkspaceFlavoursProvider]
+
+  //   meta =  data = {
+  //     "id": "_JObMxdXkmGa9vobk1PNE",
+  //     "flavour": "local"
+  // }
   const workspaces = useLiveData(workspacesService.list.workspaces$);
   const meta = useMemo(() => {
-    return workspaces.find(({ id }) => id === params.workspaceId);
+    const data = workspaces.find(({ id }) => id === params.workspaceId);
+    console.log('fuck init data workspaces', workspaces);
+    console.log('fuck init data params', workspaces);
+    console.log('fuck init data data', data);
+    return data;
   }, [workspaces, params.workspaceId]);
 
   // if listLoading is false, we can show 404 page, otherwise we should show loading page.
@@ -217,9 +231,9 @@ export const Component = (): ReactElement => {
     return <AppContainer fallback />;
   }
 
-  console.log('fuck render workspace', meta);
   return (
     <FrameworkScope scope={server?.scope}>
+      {/* fuck react open workspace init 数据2 */}
       <WorkspacePage meta={meta} />
     </FrameworkScope>
   );
@@ -247,6 +261,7 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
 
   useLayoutEffect(() => {
+    // fuck react open workspace init 数据3
     const ref = workspacesService.open({ metadata: meta });
     setWorkspace(ref.workspace);
     return () => {

@@ -115,7 +115,11 @@ export class DocsService extends Service {
     if (exists) {
       return { doc: exists.obj, release: exists.release };
     }
-
+    console.log("fuck open doc service : DocScope , props", {
+      docId,
+      blockSuiteDoc,
+      record: docRecord,
+    })
     const docScope = this.framework.createScope(DocScope, {
       docId,
       blockSuiteDoc,

@@ -100,7 +100,7 @@ export class WorkspaceRepositoryService extends Service {
         `Unknown workspace flavour: ${openOptions.metadata.flavour}`
       );
     }
-
+    // fuck 数据 init 从 服务器或者local 获取
     const workspaceScope = this.framework.createScope(WorkspaceScope, {
       openOptions,
       engineWorkerInitOptions,

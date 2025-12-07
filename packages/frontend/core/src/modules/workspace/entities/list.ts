@@ -5,6 +5,7 @@ import type { WorkspaceMetadata } from '../metadata';
 import type { WorkspaceFlavoursService } from '../services/flavours';
 
 export class WorkspaceList extends Entity {
+  // fuck react open workspace init 数据01
   workspaces$ = LiveData.from<WorkspaceMetadata[]>(
     this.flavoursService.flavours$.pipe(
       switchMap(flavours =>

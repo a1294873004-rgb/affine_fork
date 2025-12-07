@@ -75,7 +75,12 @@ export abstract class FrameworkProvider {
       props,
     });
   };
-
+  // 创建 scope的时候可以inject props
+  // const docScope = this.framework.createScope(DocScope, {
+  //   docId,
+  //   blockSuiteDoc,
+  //   record: docRecord,
+  // });
   createScope = <
     T extends Scope<any>,
     Props extends T extends Component<infer P> ? P : never,
@@ -282,7 +287,9 @@ class Resolver extends FrameworkProvider {
 
   override dispose(): void {}
 }
-
+/**
+ * Provider = Scope 实例容器 + 实例缓存池 + 工厂查找入口 + 父级 Provider 继承关系。
+ */
 export class BasicFrameworkProvider extends FrameworkProvider {
   public readonly cache = new ComponentCachePool();
   public readonly collection: Framework;

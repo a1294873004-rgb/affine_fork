@@ -436,7 +436,7 @@ export class EdgelessRootBlockComponent extends BlockComponent<
 
     this.keyboardManager = null;
   }
-
+ // 在组件 第一次渲染到 DOM 后 执行代码。
   override firstUpdated() {
     this._initSlotEffects();
     this._initResizeEffect();
@@ -466,7 +466,7 @@ export class EdgelessRootBlockComponent extends BlockComponent<
         this._refreshLayerViewport();
       })
     );
-
+    // 调整背景网格
     this._refreshLayerViewport();
   }
 

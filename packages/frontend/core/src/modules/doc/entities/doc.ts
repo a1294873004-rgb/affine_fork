@@ -56,6 +56,26 @@ export class Doc extends Entity {
   }
 
   public readonly yDoc = this.scope.props.blockSuiteDoc.spaceDoc;
+  /**
+   * fuck page/doc 数据依赖链
+   * 编辑器props page -> editor.doc.blockSuiteDoc -> DocScope.props.blockSuiteDoc
+   * 
+   * -> DocsStore.getBlockSuiteDoc(docId) -> WorkspaceService.
+   * 
+   * fuck BlockSuiteEditor page 依赖:    page={editor.doc.blockSuiteDoc}
+   * 
+   *  scope === DocScope
+   * 
+   *  DocScope = {
+   *    props = {
+          docId,
+          blockSuiteDoc,
+          record: docRecord,
+        }
+   *  }
+        store === DocsStore
+       const blockSuiteDoc = this.store.getBlockSuiteDoc(docId);
+   */
   public readonly blockSuiteDoc = this.scope.props.blockSuiteDoc;
   public readonly record = this.scope.props.record;
 

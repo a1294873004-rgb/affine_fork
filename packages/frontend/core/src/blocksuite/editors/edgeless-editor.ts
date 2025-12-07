@@ -16,6 +16,7 @@ import { guard } from 'lit/directives/guard.js';
              └─> 调用 updated(changedProperties)
 
  */
+console.log("fuck 图形编辑器")
 export class EdgelessEditor extends SignalWatcher(
   WithDisposable(ShadowlessElement)
 ) {

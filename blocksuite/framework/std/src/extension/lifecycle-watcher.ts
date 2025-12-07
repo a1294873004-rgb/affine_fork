@@ -28,7 +28,10 @@ export abstract class LifeCycleWatcher extends Extension {
   constructor(readonly std: BlockStdScope) {
     super();
   }
-
+  /**
+   * 
+   * @param di 注册依赖
+   */
   static override setup(di: Container) {
     if (!this.key) {
       throw new BlockSuiteError(
@@ -42,7 +45,10 @@ export abstract class LifeCycleWatcher extends Extension {
     ]);
 
     di.addImpl(LifeCycleWatcherIdentifier(this.key), provider =>
-      provider.get(this)
+    {
+
+      return   provider.get(this);
+    }
     );
   }
 

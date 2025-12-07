@@ -13,7 +13,36 @@ type SignaledProps<Props> = Props & {
 };
 
 const modelLabel = Symbol('model_label');
+/**
+ * 
+ * @preact/signals-core 和 Mobx 
+ * 
+ * 
+ * 总结：
 
+    observable ≈ signal
+
+    computed ≈ computed
+
+    autorun / reaction ≈ effect
+
+    runInAction ≈ batch
+
+    untracked / peek ≈ untracked / peek
+
+
+ | 功能 / 概念        | MobX API                                           | @preact/signals-core API                         | 说明                           |
+  | -------------- | -------------------------------------------------- | ------------------------------------------------ | ---------------------------- |
+  | **可观察状态**      | `observable({count:0})` 或 `observable.box(0)`      | `signal(0)`                                      | 创建响应式状态，可读写，`.value` 获取/设置   |
+  | **派生值 / 计算属性** | `computed(() => count*2)`                          | `computed(() => count.value*2)`                  | 自动追踪依赖，懒惰计算，只读               |
+  | **响应副作用**      | `autorun(() => console.log(count))`                | `effect(() => console.log(count.value))`         | 当依赖的状态变化时自动执行                |
+  | **响应计算/派生变化**  | `reaction(() => count*2, val => console.log(val))` | `effect(() => console.log(double.value))`        | 对 computed / 派生值的变化响应        |
+  | **批量更新**       | `runInAction(() => { count++; other++; })`         | `batch(() => { count.value++; other.value++; })` | 合并多次状态更新，减少中间副作用触发           |
+  | **非响应式读取**     | `observable.get()` 或直接访问                           | `signal.peek()` 或 `untracked(() => ...)`         | 读取值但不建立依赖追踪                  |
+  | **禁用追踪**       | `untracked(() => ...)`                             | `untracked(() => ...)`                           | 在回调中读信号不触发 effect / computed |
+  | **停止副作用 / 清理** | autorun / reaction 返回 disposer 函数                  | `const dispose = effect(...); dispose();`        | 停止 effect 执行，防止内存泄漏          |
+
+ */
 export class BlockModel<Props extends object = object> {
   private readonly _children = signal<string[]>([]);
 

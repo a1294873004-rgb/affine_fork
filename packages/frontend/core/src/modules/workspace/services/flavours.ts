@@ -4,6 +4,16 @@ import { combineLatest, map } from 'rxjs';
 import type { WorkspaceFlavoursProvider } from '../providers/flavour';
 
 export class WorkspaceFlavoursService extends Service {
+  /**
+   * fuck init 数据:
+   *  
+   *   framework
+       .impl(WorkspaceFlavoursProvider('LOCAL'), LocalWorkspaceFlavoursProvider)
+       .impl(WorkspaceFlavoursProvider('CLOUD'), CloudWorkspaceFlavoursProvider, [
+         GlobalState,
+         ServersService,
+       ]);
+   */
   constructor(private readonly providers: WorkspaceFlavoursProvider[]) {
     super();
   }

@@ -115,6 +115,21 @@ export class Framework {
 
   /**
    * @internal Use {@link impl} instead.
+   * 
+   * 
+   * scope.identifierName.variants
+   * 
+   * components<
+   *   scope.join('/')
+   *      <     => services
+   *        identifierName,
+   *        <   => variants
+   *          normalizedVariant,
+   *          factory
+   *        >
+   *      >
+   * >
+   * 
    */
   addFactory<T>(
     identifier: GeneralIdentifier<T>,
@@ -230,6 +245,11 @@ export class Framework {
 
 /**
  * A helper class to edit a framework.
+ * 
+ * 
+ * ✅ FrameworkEditor = 注册阶段（写入）
+  ✅ Framework = 注册结果的数据结构（存储）
+  ✅ FrameworkProvider = 运行阶段（读取 + 实例化）
  */
 class FrameworkEditor {
   private currentScopeStack: FrameworkScopeStack = ROOT_SCOPE;
@@ -237,6 +257,12 @@ class FrameworkEditor {
   constructor(private readonly collection: Framework) {}
 
   /**
+   * 
+
+   * 
+   * 
+   * 
+   * 
    * Add a service to the framework.
    *
    * @see {@link Framework}
@@ -244,6 +270,11 @@ class FrameworkEditor {
    * @example
    * ```ts
    * service(ServiceClass, [dependencies, ...])
+   * 
+   * .get(EditorsService)
+   * deps = []
+   * 
+   * test get = new EditorsService()
    * ```
    */
   service = <
@@ -335,6 +366,11 @@ class FrameworkEditor {
   };
 
   /**
+   * 
+   *  .entity(Editor, [DocService, WorkspaceService])
+   * 
+   * get(Editor) = new Editor(DocService, WorkspaceService)
+   * 
    * Add an entity to the framework.
    */
   entity = <
@@ -376,6 +412,14 @@ class FrameworkEditor {
    * or
    * addImpl(Identifier, Factory)
    * ```
+   * 
+   *   .impl(WorkspaceLocalState, WorkspaceLocalStateImpl, [
+      WorkspaceService,
+      GlobalState,
+    ])
+
+    get(WorkspaceLocalState) = new WorkspaceLocalStateImpl(WorkspaceService,GlobalState)
+   * 
    */
   impl = <
     Arg1 extends Identifier<any>,

@@ -86,16 +86,6 @@ export const Component = ({
       .catch(err => console.error('Failed to create cloud workspace', err));
   }, [defaultIndexRoute, jumpToPage, openPage, workspacesService]);
 
-  console.log(
-    'fuck index layout',
-    enableLocalWorkspace,
-    list,
-    Object.fromEntries(searchParams.entries()),
-    listIsLoading,
-    loggedIn,
-    navigating,
-    defaultIndexRoute
-  );
   useLayoutEffect(() => {
     if (!navigating) {
       return;

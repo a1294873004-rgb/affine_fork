@@ -86,6 +86,7 @@ framework.impl(PopupWindowProvider, {
 });
 const frameworkProvider = framework.provider();
 
+console.log('fuck 入口文件, framework', framework);
 // setup application lifecycle events, and emit application start event
 window.addEventListener('focus', () => {
   frameworkProvider.get(LifecycleService).applicationFocus();

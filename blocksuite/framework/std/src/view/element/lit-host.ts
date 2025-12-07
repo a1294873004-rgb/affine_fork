@@ -123,7 +123,15 @@ export class EditorHost extends SignalWatcher(
   get view(): ViewStore {
     return this.std.view;
   }
+  /*
 
+当元素 第一次被插入到 DOM 树中 时。
+
+如果元素 从 DOM 中移除然后再重新添加，connectedCallback 会再次执行。
+
+它在 render() 方法之前被调用，但在 LitElement 内部，它会确保 firstUpdated 在 DOM 初始化后才调用，所以你通常在 firstUpdated 中操作 DOM 更安全。
+
+  */
   override connectedCallback() {
     super.connectedCallback();
 

@@ -50,6 +50,12 @@ export function configureWorkspaceModule(framework: Framework) {
       WorkspaceFactoryService,
       WorkspaceDestroyService,
     ])
+    /**
+     * fuck 写法： .service(WorkspaceFlavoursService, [[WorkspaceFlavoursProvider]])
+     * WorkspaceFlavoursService 依赖所有的 all ： WorkspaceFlavoursProvider inject
+     * 
+     * 
+     */
     .service(WorkspaceFlavoursService, [[WorkspaceFlavoursProvider]])
     .service(WorkspaceDestroyService, [WorkspaceFlavoursService])
     .service(WorkspaceListService)

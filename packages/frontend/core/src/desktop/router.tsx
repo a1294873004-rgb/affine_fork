@@ -38,6 +38,7 @@ export const topLevelRoutes = [
         lazy: () => import('./pages/index'),
       },
       {
+        // fuck 数据打开 workspace 后的 page
         path: '/workspace/:workspaceId/*',
         lazy: () => import('./pages/workspace/index'),
       },
