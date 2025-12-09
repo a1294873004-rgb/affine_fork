@@ -14,11 +14,12 @@ import {
 } from 'rxjs';
 import {
   applyUpdate,
-  type Doc as YDoc,
   encodeStateAsUpdate,
   Map as YMap,
   mergeUpdates,
+  Doc as YDoc,
   type Transaction as YTransaction,
+  decodeUpdate,
 } from 'yjs';
 
 import type { DocRecord, DocStorage } from '../storage';
@@ -311,7 +312,7 @@ export class DocFrontend {
 
       // mark doc as loaded
       doc.emit('sync', [true, doc]);
-
+      // fuck getDoc === return this.client.call('docStorage.getDoc', docId);
       const docRecord = await this.storage.getDoc(job.docId);
       throwIfAborted(signal);
 
@@ -437,6 +438,13 @@ export class DocFrontend {
   private isApplyingUpdate = false;
 
   applyUpdate(docId: string, update: Uint8Array) {
+
+    try{
+const decoded = decodeUpdate(update);
+console.log("fuck decoded",decoded);
+    }catch(err){
+
+    }
     const doc = this.status.docs.get(docId);
     if (doc && !isEmptyUpdate(update)) {
       try {
@@ -449,13 +457,29 @@ export class DocFrontend {
       }
     }
   }
+private handleDocUpdatetestdebug = (
+  update: Uint8Array,
 
+) => {
+  // 创建一个临时文档
+  const tempDoc = new YDoc();
+
+  // 应用 update
+  applyUpdate(tempDoc, update);
+
+  // 获取文档内容
+  const jsonObj = tempDoc.toJSON();
+
+  console.log('fuck Update applied JSON:', JSON.stringify(jsonObj, null, 2));
+};
   private readonly handleDocUpdate = (
     update: Uint8Array,
     origin: any,
     doc: YDoc,
     transaction: YTransaction
   ) => {
+
+    this.handleDocUpdatetestdebug(update)
     if (origin === NBSTORE_ORIGIN) {
       return;
     }

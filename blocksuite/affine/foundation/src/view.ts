@@ -53,6 +53,7 @@ export class FoundationViewExtension extends ViewExtensionProvider<FoundationVie
 
   override effect() {
     super.effect();
+    // 注册 lit 组件:   customElements.define('editor-host', EditorHost);
     effects();
   }
 

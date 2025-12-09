@@ -127,17 +127,52 @@ export class BlockStdScope {
     this.container.addImpl(StdIdentifier, () => this);
 
     console.log(
-      'fuck BlockStdScope constructor internalExtensions',
+      'fuck BlockStdScope constructor ',
       internalExtensions
-    );
-    console.log(
-      'fuck BlockStdScope constructor userExtensions',
-      this.userExtensions
     );
     internalExtensions.forEach(ext => {
       const container = this.container;
       ext.setup(container);
     });
+        // fuck 注册所有 ViewExtensionProvider 提供的 service
+        // export class FoundationViewExtension extends ViewExtensionProvider<FoundationViewExtensionOptions> {
+        //   override name = 'foundation';
+
+        //   override schema = optionsSchema;
+
+        //   override effect() {
+        //     super.effect();
+        //     // 注册 lit 组件:   customElements.define('editor-host', EditorHost);
+        //     effects();
+        //   }
+
+        //   override setup(
+        //     context: ViewExtensionContext,
+        //     options?: FoundationViewExtensionOptions
+        //   ) {
+        //     super.setup(context, options);
+        //     context.register([
+        //       DocDisplayMetaService,
+        //       EditPropsStore,
+        //       DefaultOpenDocExtension,
+        //       FontLoaderService,
+
+        //       DocModeService,
+        //       ThemeService,
+        //       EmbedOptionService,
+        //       PageViewportServiceExtension,
+        //       DNDAPIExtension,
+        //       FileDropExtension,
+        //       ToolbarRegistryExtension,
+        //       AutoClearSelectionService,
+        //       FileSizeLimitService,
+        //       LinkPreviewCache,
+        //       LinkPreviewService,
+        //       CitationService,
+        //       BlockElementCommentManager,
+        //     ]);
+
+        // userExtensions = [DocDisplayMetaService,EditPropsStore,  DefaultOpenDocExtension]
 
     this.userExtensions.forEach(ext => {
       const container = this.container;

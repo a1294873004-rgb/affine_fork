@@ -102,10 +102,15 @@ export class DocsService extends Service {
   }
 
   open(docId: string) {
+    // fuck 返回    const record = this.framework.createEntity(DocRecord, { id });
     const docRecord = this.list.doc$(docId).value;
     if (!docRecord) {
       throw new Error('Doc record not found');
     }
+    // DocImpl.this._storeContainer.getStore({
+    // DocImpl. const doc = new Store({
+    //store-container Store
+    // blockSuiteDoc = new Store({ 
     const blockSuiteDoc = this.store.getBlockSuiteDoc(docId);
     if (!blockSuiteDoc) {
       throw new Error('Doc not found');

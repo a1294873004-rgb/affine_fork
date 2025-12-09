@@ -245,7 +245,8 @@ export class Store {
    * @category Store Lifecycle
    */
   readonly slots: StoreSlots;
-
+  // this._doc = readonly doc: Doc
+  // yBlocks = protected readonly _yBlocks: Y.Map<YBlock>;
   private get _yBlocks() {
     return this._doc.yBlocks;
   }
@@ -594,7 +595,19 @@ export class Store {
     if (query) {
       this._query = query;
     }
-
+    /**
+     * this._yBlocks === DocImpl._yBlocks
+     * 
+     * class DocImpl 
+     * 
+     * this._yBlocks = this._ySpaceDoc.getMap('blocks');
+     * spaceDoc === this._ySpaceDoc
+     * 
+     * this.spaceDoc.load(); 从 indexdb加载数据 
+     * 
+     * 执行: this._handleYEvents 方法
+     * 
+     */
     this._yBlocks.observeDeep(this._handleYEvents);
     this._yBlocks.forEach((_, id) => {
       this._handleYBlockAdd(id, false);
@@ -1224,7 +1237,7 @@ export class Store {
       this._subscribeToSlots();
       this._isDisposed = false;
     }
-
+    // _doc === DocImpl
     this._doc.load(initFn);
     this._provider.getAll(StoreExtensionIdentifier).forEach(ext => {
       ext.loaded();
@@ -1293,6 +1306,7 @@ export class Store {
   }
 
   private readonly _handleYEvents = (events: Y.YEvent<YBlock | Y.Text>[]) => {
+    // fuck 监听 ydoc 从 worker indexdb 更新 数据
     events.forEach(event => this._handleYEvent(event));
   };
 }

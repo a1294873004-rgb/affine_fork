@@ -89,8 +89,11 @@ const usePatchSpecs = (mode: DocMode, shared?: boolean) => {
   // comment may not be supported by the server
   const enableComment =
     isCloud && serverConfig.features.includes(ServerFeature.Comment) && !shared;
-
+  // fuck patchedSpecs === extensionSet
   const patchedSpecs = useMemo(() => {
+    // marager === this._manager = new ViewExtensionManager([
+    // 配置对应 扩展的 option 参数
+    // instance.setup(context, this._providerOptions.get(Provider));
     const manager = getViewManager()
       .config.init()
       .foundation(framework)
@@ -127,6 +130,8 @@ const usePatchSpecs = (mode: DocMode, shared?: boolean) => {
         return manager.get('mobile-edgeless');
       }
     } else {
+      // fuck build 所有的扩展 执行 setup 方法
+      // 将所有provider 的 extentions 返回
       return manager.get(mode);
     }
   }, [
@@ -142,6 +147,7 @@ const usePatchSpecs = (mode: DocMode, shared?: boolean) => {
     reactToLit,
   ]);
 
+  console.log('fuck portals', portals);
   return [
     patchedSpecs,
     useMemo(
@@ -331,7 +337,9 @@ export const BlocksuiteEdgelessEditor = forwardRef<
         .catch(console.error);
     }
   }, []);
-
+  // page === export class Store {  readonly userExtensions: ExtensionType[];
+  // specs === extensions
+  // portals === react 组件render to lit
   console.log('fuck canvas lit 组件', page, specs, portals);
   return (
     <div className={styles.affineEdgelessDocViewport}>

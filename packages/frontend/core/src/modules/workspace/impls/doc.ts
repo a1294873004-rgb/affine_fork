@@ -105,6 +105,7 @@ export class DocImpl implements Doc {
 
     this._yBlocks = this._ySpaceDoc.getMap('blocks');
     this._collection = collection;
+    // fuck init Store for doc1
     this._storeContainer = new StoreContainer(this);
   }
 
@@ -161,6 +162,9 @@ export class DocImpl implements Doc {
     }
 
     this.spaceDoc.load();
+    // WorkspaceImpl === workspace
+      // this._docCollection = new WorkspaceImpl({
+    // onLoadDoc: doc => this.engine.doc.connectDoc(doc),
     this.workspace.onLoadDoc?.(this.spaceDoc);
     this.workspace.onLoadAwareness?.(this.awarenessStore.awareness);
 

@@ -39,7 +39,7 @@ export abstract class LifeCycleWatcher extends Extension {
         'Key is not defined in the LifeCycleWatcher'
       );
     }
-
+    // static 方法setup this === 构造函数
     di.add(this as unknown as { new (std: BlockStdScope): LifeCycleWatcher }, [
       StdIdentifier,
     ]);

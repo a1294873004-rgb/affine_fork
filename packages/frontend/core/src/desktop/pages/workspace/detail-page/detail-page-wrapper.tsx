@@ -27,6 +27,7 @@ const useLoadDoc = (pageId: string) => {
     if (!docRecord) {
       return;
     }
+    // fuck doc = class Doc extends Entity {
     const { doc, release } = docsService.open(pageId);
     setDoc(doc);
     const editor = doc.scope.get(EditorsService).createEditor();

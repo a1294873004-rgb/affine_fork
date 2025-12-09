@@ -102,6 +102,11 @@ export class EdgelessEditor extends SignalWatcher(
   // this.doc 修改属性 会导致lit 组件更新:update() -> render() -> updated()
   // attribute: false 不映射成 dom 属性
   // accessor doc!: Store; ts写法生成 ： private _doc: Store; get doc() { return this._doc; } set doc(v) { this._doc = v; }
+
+    // doc = page === export class Store {  readonly userExtensions: ExtensionType[];
+  // specs === extensions
+  // portals === react 组件render to lit
+  
   @property({ attribute: false })
   accessor doc!: Store;
 

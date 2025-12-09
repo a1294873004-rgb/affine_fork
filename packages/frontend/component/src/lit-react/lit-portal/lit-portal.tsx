@@ -88,6 +88,7 @@ export type ReactToLit = (
 ) => TemplateResult;
 
 // returns a factory function that renders a given element to a lit template
+// 将 react组件挂载到 lit 组件 lit-react-portal 并且render 到 react portal coontainer 是lit dom
 export const useLitPortalFactory = () => {
   const [portals, setPortals] = useState<LitPortal[]>([]);
 

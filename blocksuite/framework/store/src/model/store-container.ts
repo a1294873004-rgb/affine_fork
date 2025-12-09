@@ -9,7 +9,7 @@ import { type Query, Store } from './store';
 
 export class StoreContainer {
   private readonly _storeMap = new Map<string, Store>();
-
+  // fuck doc === class DocImpl implements Doc {
   constructor(readonly doc: Doc) {}
 
   getStore = ({
@@ -38,7 +38,7 @@ export class StoreContainer {
         di.addImpl(DocIdentifier, () => this.doc);
       },
     };
-
+    // fuck init Store for doc2
     const doc = new Store({
       doc: this.doc,
       readonly,
