@@ -48,6 +48,36 @@ import { EdgelessPageKeyboardManager } from './edgeless-keyboard.js';
 import type { EdgelessRootService } from './edgeless-root-service.js';
 import { isCanvasElement } from './utils/query.js';
 
+/*
+lit
+
+constructor()
+→ createRenderRoot()                 // optional
+→ connectedCallback()                // 原生生命周期（第一次连接）
+→ willUpdate(changedProps)           // Lit 生命周期
+→ render()                           // Lit 渲染
+→ update(changedProps)               // Lit 生命周期
+→ updateComplete (Promise resolves)  // Lit 生命周期
+→ firstUpdated(changedProps)         // LitElement 第一次更新后
+
+// 后续属性更新:
+属性变化 →
+→ willUpdate(changedProps)
+→ render()
+→ update(changedProps)
+→ updated(changedProps)
+→ updateComplete (Promise resolves)
+
+// 当移除 DOM:
+→ disconnectedCallback()
+
+// 当再次插入 DOM:
+→ connectedCallback()                // 再次连接
+→ (可能触发更新流程)
+
+
+
+*/
 export class EdgelessRootBlockComponent extends BlockComponent<
   RootBlockModel,
   EdgelessRootService
