@@ -523,7 +523,26 @@ export class SurfaceBlockModel extends BlockModel<SurfaceBlockProps> {
 
     // @ts-expect-error ignore
     props.id = id;
-
+    /**
+     * brush tool props
+     * 
+     * {
+    "color": {
+        "dark": "#ffffff",
+        "light": "#000000"
+    },
+    "lineWidth": 4,
+    "type": "brush",
+    "points": [
+        [
+            488.09815205992675,
+            525.7752560755173
+        ]
+    ],
+    "index": "a5",
+    "id": "DynK1-mEfV"
+}
+     */
     const elementModel = this._createElementFromProps(props, {
       onChange: payload => {
         this.elementUpdated.next(payload);
