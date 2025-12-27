@@ -23,6 +23,10 @@ export class DocCRUD {
   }
 
   constructor(
+    /**
+     *  // _yBlocks === doc.yBlocks
+    // === this._yBlocks = this._ySpaceDoc.getMap('blocks'); === YMap
+     */
     private readonly _yBlocks: Y.Map<YBlock>,
     private readonly _schema: Schema
   ) {}

@@ -9,8 +9,18 @@ export class WorkspaceList extends Entity {
   workspaces$ = LiveData.from<WorkspaceMetadata[]>(
     this.flavoursService.flavours$.pipe(
       switchMap(flavours =>
-        combineLatest(flavours.map(flavour => flavour.workspaces$)).pipe(
-          map(workspaces => workspaces.flat())
+        combineLatest(flavours.map(flavour => {
+
+
+          console.log("flavour.workspaces$",flavour.workspaces$)
+          return flavour.workspaces$
+        })).pipe(
+          map(workspaces => {
+
+
+            console.log("fuck workspaces",workspaces)
+            return workspaces.flat();
+          })
         )
       )
     ),
@@ -21,7 +31,12 @@ export class WorkspaceList extends Entity {
     this.flavoursService.flavours$.pipe(
       switchMap(flavours =>
         combineLatest(
-          flavours.map(flavour => flavour.isRevalidating$ ?? of(false))
+          flavours.map(flavour => {
+
+
+            console.log("fuck flavour.isRevalidating$",flavour.isRevalidating$?.value , flavour)
+            return flavour.isRevalidating$ ?? of(false)
+          })
         ).pipe(map(isLoadings => isLoadings.some(isLoading => isLoading)))
       )
     ),

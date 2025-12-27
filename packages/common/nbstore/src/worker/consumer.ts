@@ -179,6 +179,14 @@ class StoreConsumer {
       (awareness: AwarenessRecord | null) => void
     >();
     let collectId = 0;
+    /**
+     * ui send 
+     * 
+     * message : {
+     *   name: 'docStorage.getDoc' => (docId: string) => this.docStorage.getDoc(docId)
+     * 
+     * }
+     */
     consumer.registerAll({
       'docStorage.getDoc': (docId: string) => this.docStorage.getDoc(docId),
       'docStorage.getDocDiff': ({ docId, state }) =>
@@ -331,7 +339,16 @@ class StoreConsumer {
     });
   }
 }
-
+/**
+ * UI
+ * connect 执行 open
+ * 
+ * 注册 handler 
+ * 
+ * 通过 messagechannel port1 port2 发送数据，call
+ * 
+ * 方法
+ */
 export class StoreManagerConsumer {
   private readonly storeDisposers = new Map<string, () => void>();
   private readonly storePool = new Map<
@@ -340,6 +357,17 @@ export class StoreManagerConsumer {
   >();
 
   constructor(
+    /**
+     * 
+     * 
+     * [
+  ...idbStorages, === [IndexedDBDocStorage, ...]
+  ...idbV1Storages,
+  ...broadcastChannelStorages,
+  ...cloudStorages,
+]
+
+     */
     private readonly availableStorageImplementations: StorageConstructor[]
   ) {}
 
@@ -376,6 +404,7 @@ export class StoreManagerConsumer {
           }
         });
         this.storePool.set(key, storeRef);
+        //     const closeKey = uuid();
         return closeKey;
       },
       close: key => {

@@ -38,7 +38,10 @@ export class StoreExtension extends Extension {
   disposed() {}
 
   static readonly [storeExtensionSymbol] = true;
-
+  /**
+   * add 依赖 this 对应的构造函数 依赖 StoreIdentifier
+   * add this 的实现，返回new this() : static 方法 this === 构造函数
+   */
   static override setup(di: Container) {
     if (!this.key) {
       throw new BlockSuiteError(
@@ -46,7 +49,7 @@ export class StoreExtension extends Extension {
         'Key is not defined in the StoreExtension'
       );
     }
-
+    // static 方法 this === 构造函数
     di.add(this, [StoreIdentifier]);
     di.addImpl(StoreExtensionIdentifier(this.key), provider =>
       provider.get(this)

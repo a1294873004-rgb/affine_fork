@@ -68,7 +68,7 @@ import { EditorChatPanel } from './tabs/chat';
 import { EditorFramePanel } from './tabs/frame';
 import { EditorJournalPanel } from './tabs/journal';
 import { EditorOutlinePanel } from './tabs/outline';
-
+let i = 0;
 const DetailPageImpl = memo(function DetailPageImpl() {
   const {
     workbenchService,
@@ -92,6 +92,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
   const globalContext = globalContextService.globalContext;
   const doc = docService.doc;
 
+  console.log('fuck DetailPageImpl', i++);
   const mode = useLiveData(editor.mode$);
   const activeSidebarTab = useLiveData(view.activeSidebarTab$);
 

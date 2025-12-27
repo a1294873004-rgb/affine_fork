@@ -73,7 +73,7 @@ async function exportDocs(
   // Use the collection id as the zip file name
   return download(downloadBlob, `${collection.id}.bs.zip`);
 }
-
+// 导入init zip 数据
 async function importDocs(
   collection: Workspace,
   schema: Schema,
@@ -109,6 +109,8 @@ async function importDocs(
     schema,
     blobCRUD: collection.blobSync,
     docCRUD: {
+      // impls/doc.ts getStore({
+      // doc === class DocImpl implements Doc {
       create: (id: string) => collection.createDoc(id).getStore({ id }),
       get: (id: string) => collection.getDoc(id)?.getStore({ id }) ?? null,
       delete: (id: string) => collection.removeDoc(id),

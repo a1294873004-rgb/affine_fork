@@ -65,6 +65,7 @@ export const Component = ({
   const workspacesService = useService(WorkspacesService);
   const list = useLiveData(workspacesService.list.workspaces$);
   const listIsLoading = useLiveData(workspacesService.list.isRevalidating$);
+  console.log('list', listIsLoading);
 
   const { openPage, jumpToPage, jumpToSignIn } = useNavigateHelper();
   const [searchParams] = useSearchParams();
@@ -143,21 +144,30 @@ export const Component = ({
 
   const desktopApi = useServiceOptional(DesktopApiService);
 
-  console.log('fuck desktopApi', loggedIn, desktopApi);
+  console.log('fuck desktopApi === undefined', loggedIn, desktopApi);
   useEffect(() => {
     desktopApi?.handler.ui.pingAppLayoutReady().catch(console.error);
   }, [desktopApi]);
 
   useEffect(() => {
+    // no 默认数据 ，从zip 导入 tutorial 数据
     if (listIsLoading || list.length > 0 || !enableLocalWorkspace) {
       return;
     }
 
+    // return { meta, defaultDocId: defaultDoc?.id  === pageId };
     createFirstAppData(workspacesService)
       .then(createdWorkspace => {
         if (createdWorkspace) {
           if (createdWorkspace.defaultPageId) {
+            /**
+             *     return navigate(`/workspace/${workspaceId}/${pageId}`, {
+        replace: logic === RouteLogic.REPLACE,
+      });
+             */
             jumpToPage(
+              // Doc id
+              // pageId
               createdWorkspace.meta.id,
               createdWorkspace.defaultPageId
             );

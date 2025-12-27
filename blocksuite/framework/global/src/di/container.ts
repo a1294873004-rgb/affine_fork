@@ -97,8 +97,13 @@ import type {
  * // is equivalent to
  * services.addFactory(ServiceB, (provider) => new ServiceB(provider.getAll(FeatureA)));
  * ```
+ * 
+ * 依赖管理容器 配置仓库
  */
 export class Container {
+  /**
+   * <scope,<依赖string,<依赖 variant ,>>
+   */
   private readonly services = new Map<
     string,
     Map<string, Map<ServiceVariant, ServiceFactory>>

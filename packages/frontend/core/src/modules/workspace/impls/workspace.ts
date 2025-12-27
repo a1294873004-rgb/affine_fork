@@ -53,6 +53,7 @@ export class WorkspaceImpl implements Workspace {
   };
 
   get docs() {
+    // class DocImpl
     return this.blockCollections;
   }
 
@@ -90,7 +91,11 @@ export class WorkspaceImpl implements Workspace {
   }
 
   private _bindDocMetaEvents() {
+    // fuck add Doc
+    // docId 对应 一个 page 
     this.meta.docMetaAdded.subscribe(docId => {
+      // add doc meta
+      // docmeta add to Doc.Map<"meta", pages : [ {docId }]>
       const doc = new DocImpl({
         id: docId,
         collection: this,

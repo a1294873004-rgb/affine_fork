@@ -62,6 +62,27 @@ export class WorkspaceEngine extends Entity<{
     }
     this.started = true;
     // 返回 work send 的 call 接口 store 存储逻辑
+    /*
+web/src/app.tsx
+   openStore =  return this.nbstoreProvider.openStore(key, options);
+
+framework.impl(NbstoreProvider, {
+  openStore(key, options) {
+    // fuck const { store, dispose } = this.nbstoreService.openStore
+    return storeManagerClient.open(key, options);
+  },
+});
+
+
+
+store 封装了对work indexdb的 方法call
+WorkerDocStorage
+  async getDoc(docId: string) {
+    return this.client.call('docStorage.getDoc', docId);
+  }
+
+
+    */
     const { store, dispose } = this.nbstoreService.openStore(
       (this.props.isSharedMode ? 'shared:' : '') +
         `workspace:${this.workspaceService.workspace.flavour}:${this.workspaceService.workspace.id}`,
@@ -75,6 +96,9 @@ export class WorkspaceEngine extends Entity<{
         console.error('error enabling battery save mode', err);
       });
     }
+    /**
+     * worker 数据库连接
+     */
     this.client = store;
     this.disposables.push(dispose);
     this.eventBus.emit(WorkspaceEngineBeforeStart, this);

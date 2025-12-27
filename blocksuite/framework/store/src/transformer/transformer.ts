@@ -200,6 +200,8 @@ export class Transformer {
       });
       DocSnapshotSchema.parse(snapshot);
       const { meta, blocks } = snapshot;
+      // return Store
+      //  create: (id: string) => this.workspace.createDoc(id).getStore({ id }),
       const doc = this.docCRUD.create(meta.id);
       doc.load();
       await this.snapshotToBlock(blocks, doc);
@@ -521,7 +523,9 @@ export class Transformer {
       new BaseBlockTransformer(this._transformerConfigs)
     );
   }
-
+  /**
+   * Doc.get("blocks", Blocks)
+   */
   private async _insertBlockTree(
     nodes: DraftBlockTreeNode[],
     doc: Store,

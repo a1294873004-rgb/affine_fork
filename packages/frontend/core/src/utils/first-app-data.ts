@@ -12,15 +12,20 @@ import {
   getAFFiNEWorkspaceSchema,
   type WorkspacesService,
 } from '../modules/workspace';
-
+// fuck init 的时候从 zip 文件导入 init json 数据构建 doc
 export async function buildShowcaseWorkspace(
   workspacesService: WorkspacesService,
   flavour: string,
   workspaceName: string
 ) {
+  // class LocalWorkspaceFlavourProvider
+  // docCollection = const docCollection = new WorkspaceImpl({
+  // meta =   return { id, flavour: 'local' }; id === Workspace id
   const meta = await workspacesService.create(flavour, async docCollection => {
+    // init pages  this._proxy.pages = [];
     docCollection.meta.initialize();
     docCollection.doc.getMap('meta').set('name', workspaceName);
+    // 或者init zip json 数据
     const blob = await (await fetch(onboardingUrl)).blob();
 
     await ZipTransformer.importDocs(
@@ -67,6 +72,7 @@ export async function buildShowcaseWorkspace(
 
 const logger = new DebugLogger('createFirstAppData');
 
+// fuck init 的时候从 zip 文件导入 init json 数据构建 doc
 export async function createFirstAppData(workspacesService: WorkspacesService) {
   if (localStorage.getItem('is-first-open') !== null) {
     return;

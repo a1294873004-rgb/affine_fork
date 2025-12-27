@@ -19,7 +19,7 @@ export class IndexedDBDocStorage extends DocStorageBase<IDBConnectionOptions> {
   static readonly identifier = 'IndexedDBDocStorage';
 
   readonly connection = share(new IDBConnection(this.options));
-
+  // 已经建立好的、处于连接状态的数据库实例对象
   get db() {
     return this.connection.inner.db;
   }
@@ -37,8 +37,9 @@ export class IndexedDBDocStorage extends DocStorageBase<IDBConnectionOptions> {
 
     while (true) {
       try {
+        // 开启一个事务，并且这个事务要同时操作 updates 和 clocks 这两张表
         const trx = this.db.transaction(['updates', 'clocks'], 'readwrite');
-
+        // 将数据插入到表： updates
         await trx.objectStore('updates').add({
           ...update,
           createdAt: timestamp,

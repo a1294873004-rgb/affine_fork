@@ -23,6 +23,9 @@ export class StoreContainer {
     if (readonly || query) {
       idOrOptions = { readonly, query };
     } else if (!id) {
+      // DocImpl._collection
+      //   this.idGenerator = nanoid;
+      // this.doc === class DocImpl
       idOrOptions = this.doc.workspace.idGenerator();
     } else {
       idOrOptions = id;
@@ -32,13 +35,14 @@ export class StoreContainer {
     if (this._storeMap.has(key)) {
       return this._storeMap.get(key) as Store;
     }
-
+    // this.doc === class DocImpl
     const storeExtension: ExtensionType = {
       setup: di => {
         di.addImpl(DocIdentifier, () => this.doc);
       },
     };
     // fuck init Store for doc2
+    // class Store {
     const doc = new Store({
       doc: this.doc,
       readonly,

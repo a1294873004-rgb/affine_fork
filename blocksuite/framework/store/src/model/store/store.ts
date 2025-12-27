@@ -212,7 +212,9 @@ export class Store {
   };
 
   private readonly _doc: Doc;
-
+  /**
+   * 所有 block map
+   */
   private readonly _blocks = signal<Record<string, Block>>({});
 
   private readonly _crud: DocCRUD;
@@ -569,16 +571,19 @@ export class Store {
       yBlockUpdated: new Subject(),
     };
     this._schema = new Schema();
-
+    // di
     const container = new Container();
     container.addImpl(StoreIdentifier, () => this);
-
+    // internalExtensions 添加到DI
     internalExtensions.forEach(ext => {
       ext.setup(container);
     });
 
     const userExtensions = extensions ?? [];
     this.userExtensions = userExtensions;
+    // class StoreProvider { [FoundationStoreExtension]
+    // userExtensions = [BlockSelectionExtension, TextSelectionExtension]
+    // 将这些extesion add to DI
     userExtensions.forEach(extension => {
       extension.setup(container);
     });
@@ -587,7 +592,11 @@ export class Store {
     this._provider.getAll(BlockSchemaIdentifier).forEach(schema => {
       this._schema.register([schema]);
     });
+    // this._doc === di.addImpl(DocIdentifier, () => this.doc);
+    // === class DocImpl
     this._doc = this._provider.get(DocIdentifier);
+    // _yBlocks === doc.yBlocks
+    // === this._yBlocks = this._ySpaceDoc.getMap('blocks'); === YMap
     this._crud = new DocCRUD(this._yBlocks, this._schema);
     if (readonly !== undefined) {
       this._readonly.value = readonly;
@@ -609,6 +618,7 @@ export class Store {
      * 
      */
     this._yBlocks.observeDeep(this._handleYEvents);
+    // 加载init 数据blocks
     this._yBlocks.forEach((_, id) => {
       this._handleYBlockAdd(id, false);
 

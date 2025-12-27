@@ -37,6 +37,8 @@ export class Workbench extends Entity {
 
   readonly views$: LiveData<View[]> = new LiveData(
     this.defaultState.views.map(meta => {
+
+      console.log("fuck views", meta)
       return this.framework.createEntity(View, {
         id: meta.id,
         defaultLocation: meta.path,

@@ -95,6 +95,8 @@ export class WorkspaceRepositoryService extends Service {
     );
     const engineWorkerInitOptions =
       customEngineWorkerInitOptions ??
+      // local 返回：   getEngineWorkerInitOptions(workspaceId: string): WorkerInitOptions {
+      // 配置数据 customEngineWorkerInitOptions === null
       flavourProvider?.getEngineWorkerInitOptions(openOptions.metadata.id);
     if (!engineWorkerInitOptions) {
       throw new Error(
@@ -108,7 +110,7 @@ export class WorkspaceRepositoryService extends Service {
     });
 
     const workspace = workspaceScope.get(WorkspaceService).workspace;
-
+  // 连接 worker 数据库
     workspace.engine.start();
 
     workspaceScope.emitEvent(WorkspaceInitialized, workspace);

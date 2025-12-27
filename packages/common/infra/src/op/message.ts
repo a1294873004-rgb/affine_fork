@@ -139,6 +139,7 @@ export abstract class AutoMessageHandler {
   }
 
   protected handleMessage = ignoreUnknownEvent((msg: Messages) => {
+    // event.data.type
     const handler = this.handlers[msg.type];
     if (!handler) {
       return;

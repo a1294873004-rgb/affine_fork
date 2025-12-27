@@ -46,6 +46,8 @@ Table(BlobSync)
 | peer | key | uploadedAt |
 |------|-----|------------|
 | str  | str |   Date     |
+
+fuck 表结构
  */
 export interface DocStorageSchema extends DBSchema {
   snapshots: {

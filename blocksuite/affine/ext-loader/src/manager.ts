@@ -12,6 +12,45 @@ import type { BaseExtensionProvider, Context, Empty } from './base-provider';
  */
 export class ExtensionManager<Scope extends string> {
   /** @internal */
+
+  /*
+
+
+<
+Scope === 'store',
+
+[
+所有的 extension
+
+例如
+FoundationStoreExtension = [
+      // predefined selections
+      BlockSelectionExtension,
+      TextSelectionExtension,
+      SurfaceSelectionExtension,
+      CursorSelectionExtension,
+      HighlightSelectionExtension,
+
+      // predefined adapters
+      MarkdownAdapterFactoryExtension,
+      PlainTextAdapterFactoryExtension,
+      HtmlAdapterFactoryExtension,
+      NotionTextAdapterFactoryExtension,
+      NotionHtmlAdapterFactoryExtension,
+      MixTextAdapterFactoryExtension,
+
+      // shared services
+      FeatureFlagService,
+      BlockMetaService,
+      // TODO(@mirone): maybe merge these services into a file setting service
+      ImageProxyService,
+    ]
+
+]
+>
+
+
+  */
   protected _extensions: Map<string, Set<ExtensionType>> = new Map();
   /** @internal */
   private readonly _providers: Set<typeof BaseExtensionProvider<Scope>>;
@@ -35,15 +74,25 @@ export class ExtensionManager<Scope extends string> {
     this._providers = new Set(providers);
   }
 
+  // .value.get('store');
   /** @internal */
   private readonly _build = (scope: Scope) => {
     const context = this._getContextByScope(scope);
+    /*
 
+new StoreExtensionManager([
+      ...getInternalStoreExtensions(), = [FoundationStoreExtension,...]
+      AIStoreExtension,
+      FeatureFlagStoreExtension,
+    ]);
+
+    */
     this._providers.forEach(Provider => {
       let instance: BaseExtensionProvider<Scope>;
       if (this._providerInstances.has(Provider)) {
         instance = this._providerInstances.get(Provider)!;
       } else {
+        // new FoundationStoreExtension()
         instance = new Provider();
         this._providerInstances.set(Provider, instance);
       }
@@ -105,6 +154,7 @@ export class ExtensionManager<Scope extends string> {
         `Extension scope ${scope} not found`
       );
     }
+    // 返回所有注册的extension: [BlockSelectionExtension,...]
     return Array.from(extensionSet);
   }
 
@@ -116,6 +166,11 @@ export class ExtensionManager<Scope extends string> {
    * @typeParam T - The type of configuration options for the provider
    * @param provider - The provider class to configure
    * @param options - New configuration options or a function to update existing options
+   * 
+   * 
+   * 设置某个 Provide 构造时候的 构造函数参数
+   * 例如new FoundationStoreExtension(options)
+   * 
    */
   configure<T extends Empty>(
     provider: typeof BaseExtensionProvider<Scope, T>,

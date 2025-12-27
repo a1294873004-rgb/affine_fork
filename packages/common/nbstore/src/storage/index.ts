@@ -28,7 +28,9 @@ type Storages =
 export type SpaceStorageOptions = {
   [K in StorageType]?: Storages & { storageType: K };
 };
-
+/**
+ * 聚合 class 使用 get 获取对应stroage
+ */
 export class SpaceStorage {
   protected readonly storages: {
     [K in StorageType]: Storages & { storageType: K };

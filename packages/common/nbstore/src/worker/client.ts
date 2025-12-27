@@ -32,6 +32,9 @@ import type { StoreInitOptions, WorkerManagerOps, WorkerOps } from './ops';
 
 export type { StoreInitOptions as WorkerInitOptions } from './ops';
 
+/**
+ * 返回和 worker 交互的 port 接口
+ */
 export class StoreManagerClient {
   private readonly connections = new Map<
     string,
@@ -42,7 +45,7 @@ export class StoreManagerClient {
   >();
 
   constructor(private readonly client: OpClient<WorkerManagerOps>) {}
-
+    // key === `workspace:${this.workspaceService.workspace.flavour}:${this.workspaceService.workspace.id}`
   open(key: string, options: StoreInitOptions) {
     const { port1, port2 } = new MessageChannel();
 
@@ -238,6 +241,7 @@ class WorkerDocStorage implements DocStorage {
   readonly isReadonly = false;
 
   async getDoc(docId: string) {
+    // worker 方法：   'docStorage.getDoc': (docId: string) => this.docStorage.getDoc(docId),
     return this.client.call('docStorage.getDoc', docId);
   }
 

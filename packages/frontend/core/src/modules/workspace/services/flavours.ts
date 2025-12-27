@@ -4,6 +4,18 @@ import { combineLatest, map } from 'rxjs';
 import type { WorkspaceFlavoursProvider } from '../providers/flavour';
 
 export class WorkspaceFlavoursService extends Service {
+    flavours$ = LiveData.from(
+    combineLatest(this.providers.map(p => p.workspaceFlavours$)).pipe(
+      map(flavours =>{
+
+        console.log("fuck flavours",flavours)
+
+        return  flavours.flat();
+      })
+    ),
+    []
+  );
+
   /**
    * fuck init 数据:
    *  
@@ -16,12 +28,8 @@ export class WorkspaceFlavoursService extends Service {
    */
   constructor(private readonly providers: WorkspaceFlavoursProvider[]) {
     super();
+    console.log("fuck  flavours$",this.flavours$)
   }
 
-  flavours$ = LiveData.from(
-    combineLatest(this.providers.map(p => p.workspaceFlavours$)).pipe(
-      map(flavours => flavours.flat())
-    ),
-    []
-  );
+
 }

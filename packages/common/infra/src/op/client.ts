@@ -44,7 +44,19 @@ export class OpClient<Ops extends OpSchema> extends AutoMessageHandler {
     super(port);
     merge(this.options, options);
   }
-
+  /**
+   * 
+   * msg ===  event.data
+   *   event.data.type = {
+   * return（msg) => ,
+   * next,
+   * error,
+   * complete,
+   * 
+   *   }
+   * 
+   * 
+   */
   protected override get handlers() {
     return {
       return: this.handleReturnMessage,

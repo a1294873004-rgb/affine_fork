@@ -28,6 +28,16 @@ export class FoundationStoreExtension extends StoreExtensionProvider {
 
   override setup(context: StoreExtensionContext) {
     super.setup(context);
+    // ExtensionManager._registerToScope([])
+
+    /*
+
+register: (extensions: ExtensionType[] | ExtensionType) => {
+        this._registerToScope(scope, extensions);
+        return context;
+      },
+
+    */
     context.register([
       // predefined selections
       BlockSelectionExtension,

@@ -121,6 +121,7 @@ class LocalWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
     // notify all browser tabs, so they can update their workspace list
     this.notifyChannel.postMessage(id);
   }
+  // 创建workspace : const meta = await workspacesService.create(
   async createWorkspace(
     initial: (
       docCollection: WorkspaceImpl,
@@ -128,6 +129,7 @@ class LocalWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
       docStorage: DocStorage
     ) => Promise<void>
   ): Promise<WorkspaceMetadata> {
+    // Workspace id
     const id = nanoid();
 
     // save the initial state to local storage, then sync to cloud
@@ -174,6 +176,7 @@ class LocalWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
         readonly: false,
       },
       onLoadDoc(doc) {
+        // doc === rootDoc: new YDoc({ guid: id }),
         docList.add(doc);
       },
     });
@@ -181,7 +184,7 @@ class LocalWorkspaceFlavourProvider implements WorkspaceFlavourProvider {
     try {
       // apply initial state
       await initial(docCollection, blobStorage, docStorage);
-
+      // 将yjs bin 数据保存到 indexdb
       for (const subdocs of docList) {
         await docStorage.pushDocUpdate({
           docId: subdocs.guid,

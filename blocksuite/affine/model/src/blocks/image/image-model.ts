@@ -58,5 +58,6 @@ export const ImageBlockSchema = defineBlockSchema({
 export const ImageBlockSchemaExtension = BlockSchemaExtension(ImageBlockSchema);
 
 export class ImageBlockModel
+//prototype 改成 ： GfxBlockElementModel
   extends GfxCompatible<ImageBlockProps>(BlockModel)
   implements GfxElementGeometry {}

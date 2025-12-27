@@ -24,7 +24,7 @@ export const InMemoryWorkbenchDefaultState: WorkbenchDefaultState = {
   basename: '/',
   views: [
     {
-      id: nanoid(),
+      id: `${nanoid()}__fuck`,
     },
   ],
   activeViewIndex: 0,

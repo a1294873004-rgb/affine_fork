@@ -61,7 +61,9 @@ export abstract class FrameworkProvider {
       optional: true,
     });
   };
-
+  /**
+   * 不会缓存的instance 
+   */
   createEntity = <
     T extends Entity<any>,
     Props extends T extends Component<infer P> ? P : never,

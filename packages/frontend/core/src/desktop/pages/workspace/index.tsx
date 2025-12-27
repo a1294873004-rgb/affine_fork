@@ -230,6 +230,15 @@ export const Component = (): ReactElement => {
   if (!meta) {
     return <AppContainer fallback />;
   }
+  console.log(
+    'fuck detailDocRoute',
+    server, // undefined
+    server?.scope, // undefined
+    meta, // {pageId === id: 'nvDLs3tS35PQQmfKnOb37', flavour: 'local'}
+
+    workspaces,
+    detailDocRoute
+  );
 
   return (
     <FrameworkScope scope={server?.scope}>

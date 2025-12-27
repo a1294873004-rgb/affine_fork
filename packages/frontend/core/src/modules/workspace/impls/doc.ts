@@ -48,7 +48,11 @@ export class DocImpl implements Doc {
 
   /** Indicate whether the block tree is ready */
   private _ready = false;
-
+  /**
+   * Doc 下保持 blocks的map
+   * 
+   * Doc.Map<"blocks", [Blocks]>
+   */
   protected readonly _yBlocks: Y.Map<YBlock>;
 
   /**
@@ -96,7 +100,11 @@ export class DocImpl implements Doc {
   get yBlocks() {
     return this._yBlocks;
   }
-
+  /**
+   * 
+   *  get workspace === collection === WorkspaceImpl
+   * doc === DocImpl
+   */
   constructor({ id, collection, doc }: DocOptions) {
     this.id = id;
     this.rootDoc = doc;
@@ -130,12 +138,13 @@ export class DocImpl implements Doc {
       this._yBlocks.clear();
     }
   }
-
+  // create: (id: string) => collection.createDoc(id).getStore({ id }),
   getStore({
     readonly,
     query,
     provider,
     extensions,
+    // id === docId = pageId
     id,
   }: GetStoreOptions = {}) {
     const storeExtensions = getStoreManager()
@@ -147,6 +156,8 @@ export class DocImpl implements Doc {
       .concat(this.storeExtensions);
     const extensionSet = new Set(exts);
 
+    // return ===  const doc = new Store({
+    // class Store {
     return this._storeContainer.getStore({
       id,
       readonly,

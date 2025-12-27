@@ -10,6 +10,23 @@ export class WorkspaceEngineService extends Service {
       this._engine = this.framework.createEntity(WorkspaceEngine, {
         isSharedMode: this.workspaceScope.props.openOptions.isSharedMode,
         engineWorkerInitOptions:
+        /**
+         * 
+         * class LocalWorkspaceFlavourProvider
+         * 
+         * 
+  getEngineWorkerInitOptions(workspaceId: string): WorkerInitOptions {
+    return {
+      local: {
+        doc: {
+          name: this.DocStorageType.identifier,
+          opts: {
+            flavour: this.flavour,
+            type: 'workspace',
+            id: workspaceId,
+          },
+        },
+         */
           this.workspaceScope.props.engineWorkerInitOptions,
       });
     }

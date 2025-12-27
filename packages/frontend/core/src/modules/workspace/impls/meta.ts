@@ -103,6 +103,9 @@ export class WorkspaceMetaImpl implements WorkspaceMeta {
 
   constructor(doc: Y.Doc) {
     this._doc = doc;
+    // _id === meta
+    // 在 Yjs Doc 下保存 meta
+    // meta 下保存 pages= []
     const map = doc.getMap(this._id) as Y.Map<MetaState[keyof MetaState]>;
     this._yMap = map;
     this._proxy = createYProxy(map);
@@ -136,7 +139,7 @@ export class WorkspaceMetaImpl implements WorkspaceMeta {
 
     this.docMetaUpdated.next();
   }
-
+  // 将doc add to meta = {pages : [doc: DocMeta]}
   addDocMeta(doc: DocMeta, index?: number) {
     this._doc.transact(() => {
       if (!this.docs) {
