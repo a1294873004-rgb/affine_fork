@@ -61,6 +61,7 @@ export class EditorHost extends SignalWatcher(
 
   private readonly _renderModel = (model: BlockModel): TemplateResult => {
     const { flavour } = model;
+    console.log("fuck _renderModel")
     const block = this.store.getBlock(model.id);
     if (!block || block.blockViewType === 'hidden') {
       return html`${nothing}`;

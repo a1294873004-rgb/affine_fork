@@ -100,7 +100,7 @@ export class DocsService extends Service {
     }
     return null;
   }
-
+  // 创建 Doc => pageId
   open(docId: string) {
     // fuck 返回    const record = this.framework.createEntity(DocRecord, { id });
     const docRecord = this.list.doc$(docId).value;

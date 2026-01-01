@@ -34,6 +34,7 @@ export interface BlockStdOptions {
 export const internalExtensions = [
   ServiceManager,
   CommandManager,
+  // 鼠标 操作 event
   UIEventDispatcher,
   RangeManager,
   ViewStore,
@@ -130,6 +131,7 @@ export class BlockStdScope {
       'fuck BlockStdScope constructor ',
       internalExtensions
     );
+    // 建立依赖
     internalExtensions.forEach(ext => {
       const container = this.container;
       ext.setup(container);
@@ -181,6 +183,7 @@ export class BlockStdScope {
 
     this.provider = this.container.provider(undefined, this.store.provider);
 
+    console.log("fuck provider", this.provider)
     this._lifeCycleWatchers.forEach(watcher => {
       watcher.created();
     });

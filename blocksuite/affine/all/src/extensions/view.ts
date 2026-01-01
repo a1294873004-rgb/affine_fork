@@ -114,6 +114,7 @@ export function getInternalViewExtensions() {
     RemoteSelectionViewExtension,
     ScrollAnchoringViewExtension,
     SlashMenuViewExtension,
+    // fuck toobar
     ToolbarViewExtension,
     ViewportOverlayViewExtension,
     EdgelessZoomToolbarViewExtension,

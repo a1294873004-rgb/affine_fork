@@ -589,6 +589,7 @@ export class Store {
     });
 
     this._provider = container.provider(undefined, provider);
+    // fuck 注册所有的 schema flavourSchemaMap
     this._provider.getAll(BlockSchemaIdentifier).forEach(schema => {
       this._schema.register([schema]);
     });
@@ -685,7 +686,7 @@ export class Store {
           if (key) {
             block.model.propsUpdated.next({ key });
           }
-
+          console.log("fuck onChange",key)
           this.slots.blockUpdated.next({
             type: 'update',
             id,

@@ -248,6 +248,7 @@ export class AffineToolbarWidget extends WidgetComponent {
   toolbar = new EditorToolbar();
 
   get toolbarRegistry() {
+    // fuck class ToolbarRegistryExtension extends Extension {
     return this.std.get(ToolbarRegistryIdentifier);
   }
 
@@ -353,6 +354,8 @@ export class AffineToolbarWidget extends WidgetComponent {
     // Selects blocks in note.
     disposables.add(
       std.selection.filter$(BlockSelection).subscribe(selections => {
+
+        console.log("fuck selections",selections)
         const blockIds = selections.map(s => s.blockId);
         const count = blockIds.length;
         let flavour = 'affine:note';
@@ -406,6 +409,7 @@ export class AffineToolbarWidget extends WidgetComponent {
     // Selects elements in edgeless.
     // Triggered only when not in editing state.
     disposables.add(
+      // fuck 选择更新 fuck toolbar
       context.gfx.selection.slots.updated.subscribe(selections => {
         // Should remove selections when clicking on frame navigator
         if (context.isPageMode) {

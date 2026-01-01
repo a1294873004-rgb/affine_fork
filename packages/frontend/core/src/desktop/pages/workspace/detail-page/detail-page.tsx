@@ -92,7 +92,7 @@ const DetailPageImpl = memo(function DetailPageImpl() {
   const globalContext = globalContextService.globalContext;
   const doc = docService.doc;
 
-  console.log('fuck DetailPageImpl', i++);
+  console.log('fuck DetailPageImpl', workspace, i++);
   const mode = useLiveData(editor.mode$);
   const activeSidebarTab = useLiveData(view.activeSidebarTab$);
 

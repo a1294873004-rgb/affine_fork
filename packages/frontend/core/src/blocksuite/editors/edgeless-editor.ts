@@ -64,7 +64,7 @@ export class EdgelessEditor extends SignalWatcher(
       extensions: this.specs,
     });
   }
-
+  //  DOM 已渲染完成
   override async getUpdateComplete(): Promise<boolean> {
     const result = await super.getUpdateComplete();
     await this.host?.updateComplete;

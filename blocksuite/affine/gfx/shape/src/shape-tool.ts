@@ -74,7 +74,7 @@ export class ShapeTool extends BaseTool<ShapeToolOption> {
     // create a shape block when drag start
     const [modelX, modelY] = viewport.toModelCoord(e.point.x, e.point.y);
     const bound = new Bound(modelX, modelY, width, height);
-
+    // fuck add data
     const id = this.gfx.surface!.addElement({
       type: CanvasElementType.SHAPE,
       shapeType: getShapeType(shapeName),

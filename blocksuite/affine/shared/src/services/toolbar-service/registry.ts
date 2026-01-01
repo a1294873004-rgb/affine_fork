@@ -22,7 +22,7 @@ export function ToolbarModuleExtension(module: ToolbarModule): ExtensionType {
     },
   };
 }
-
+// fuck select toolbar
 export class ToolbarRegistryExtension extends Extension {
   flavour$ = signal<string>('affine:note');
 

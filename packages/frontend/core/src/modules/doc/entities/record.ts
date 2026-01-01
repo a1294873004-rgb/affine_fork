@@ -10,6 +10,8 @@ import type { DocsStore } from '../stores/docs';
  * # DocRecord
  *
  * Some data you can use without open a doc.
+ * 
+ * 管理 pageId 对应的 page 
  */
 export class DocRecord extends Entity<{ id: string }> {
   id: string = this.props.id;

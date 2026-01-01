@@ -756,6 +756,7 @@ export class EdgelessSelectedRectWidget extends WidgetComponent<RootBlockModel> 
 
   override render() {
     const elements = this.selection.selectedElements;
+      console.log("render select1")
 
     if (!this._shouldRenderSelection(elements)) return nothing;
 
@@ -766,6 +767,7 @@ export class EdgelessSelectedRectWidget extends WidgetComponent<RootBlockModel> 
     const isConnector =
       elements.length === 1 && elements[0] instanceof ConnectorElementModel;
 
+      console.log("render select")
     return html`
       <style>
         .affine-edgeless-selected-rect .handle[aria-label='right']::after {

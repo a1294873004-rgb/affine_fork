@@ -409,7 +409,11 @@ export class InteractivityManager extends GfxExtension {
 
       this._safeExecute(() => {
         activeExtensionHandlers.forEach(handler =>
-          handler?.onDragMove?.(moveContext)
+        {
+
+            console.log("fukc ")
+            handler?.onDragMove?.(moveContext)
+        }
         );
       }, 'Error while executing extension `onDragMove`');
 

@@ -47,7 +47,7 @@ function testClickOnBlankArea(
 
   return state.raw.clientX < blankLeft || state.raw.clientX > blankRight;
 }
-
+// fuck root page view
 export class PageRootBlockComponent extends BlockComponent<RootBlockModel> {
   static override styles = css`
     editor-host:has(> affine-page-root, * > affine-page-root) {
@@ -397,6 +397,7 @@ export class PageRootBlockComponent extends BlockComponent<RootBlockModel> {
   }
 
   override renderBlock() {
+    console.log("fuck render root page")
     const widgets = html`${repeat(
       Object.entries(this.widgets),
       ([id]) => id,

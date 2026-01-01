@@ -8,7 +8,7 @@ import { DocsService } from '../../doc';
 import { WorkspaceImpl } from '../impls/workspace';
 import type { WorkspaceScope } from '../scopes/workspace';
 import { WorkspaceEngineService } from '../services/engine';
-
+// 管理所有doc 的 Workspace
 export class Workspace extends Entity {
   constructor(
     public readonly scope: WorkspaceScope,
@@ -24,7 +24,7 @@ export class Workspace extends Entity {
   readonly meta = this.scope.props.openOptions.metadata;
 
   readonly flavour = this.meta.flavour;
-
+  // worksapce YDOC
   readonly rootYDoc = new YDoc({ guid: this.openOptions.metadata.id });
 
   _docCollection: WorkspaceInterface | null = null;

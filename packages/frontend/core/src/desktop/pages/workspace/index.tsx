@@ -111,7 +111,7 @@ export const Component = (): ReactElement => {
   // workspacesService.list.workspaces$ === flavour.workspaces$.workspaceFlavours$
   // flavour.workspaces$ = [LocalWorkspaceFlavoursProvider.workspaces$ , CloudWorkspaceFlavoursProvider]
 
-  //   meta =  data = {
+  //  workspaces =  meta =  data = {
   //     "id": "_JObMxdXkmGa9vobk1PNE",
   //     "flavour": "local"
   // }
@@ -271,6 +271,7 @@ const WorkspacePage = ({ meta }: { meta: WorkspaceMetadata }) => {
 
   useLayoutEffect(() => {
     // fuck react open workspace init 数据3
+    // new workspace
     const ref = workspacesService.open({ metadata: meta });
     setWorkspace(ref.workspace);
     return () => {

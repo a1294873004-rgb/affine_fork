@@ -25,6 +25,7 @@ export class DocsStore extends Store {
   getBlockSuiteDoc(id: string) {
     return (
       this.workspaceService.workspace.docCollection
+      //  const doc = new DocImpl({ .getStore({ id }) 
         .getDoc(id)
         ?.getStore({ id }) ?? null
     );
@@ -33,7 +34,7 @@ export class DocsStore extends Store {
   getBlocksuiteCollection() {
     return this.workspaceService.workspace.docCollection;
   }
-
+  // 创建 workspace 下的 page 插入到YDOc.Map<meta {pages: [ { id:pageId,...} ] }>
   createDoc(docId?: string) {
     const id = docId ?? nanoid();
 

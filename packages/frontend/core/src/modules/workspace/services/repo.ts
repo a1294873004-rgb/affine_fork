@@ -37,6 +37,9 @@ export class WorkspaceRepositoryService extends Service {
    *
    * @returns the workspace reference and a release function, don't forget to call release function when you don't
    * need the workspace anymore.
+   * 
+   * 
+   * 返回 Workspace
    */
   open = (
     options: WorkspaceOpenOptions,

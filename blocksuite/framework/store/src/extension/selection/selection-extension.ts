@@ -159,6 +159,8 @@ export class StoreSelectionExtension extends StoreExtension {
       this._id,
       selections.map(s => s.toJSON())
     );
+
+    console.log("fuck select set", selections)
     this._selections.value = selections;
     this.slots.changed.next(selections);
   }

@@ -49,7 +49,7 @@ export class RootBlockModel extends BlockModel<RootBlockProps> {
     return empty;
   }
 }
-
+// fuck root
 export const RootBlockSchema = defineBlockSchema({
   flavour: 'affine:page',
   props: (internal): RootBlockProps => ({

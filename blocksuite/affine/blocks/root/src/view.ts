@@ -22,7 +22,7 @@ import { EdgelessLocker } from './edgeless/edgeless-root-spec';
 import { AltCloneExtension } from './edgeless/interact-extensions/clone-ext';
 import { effects } from './effects';
 import { fallbackKeymap } from './keyboard/keymap';
-
+// fuck 注册root view
 export class RootViewExtension extends ViewExtensionProvider {
   override name = 'affine-root-block';
 

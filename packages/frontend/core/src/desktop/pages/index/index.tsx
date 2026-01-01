@@ -65,7 +65,7 @@ export const Component = ({
   const workspacesService = useService(WorkspacesService);
   const list = useLiveData(workspacesService.list.workspaces$);
   const listIsLoading = useLiveData(workspacesService.list.isRevalidating$);
-  console.log('list', listIsLoading);
+  console.log('list', list, listIsLoading);
 
   const { openPage, jumpToPage, jumpToSignIn } = useNavigateHelper();
   const [searchParams] = useSearchParams();
@@ -127,6 +127,8 @@ export const Component = ({
 
       const openWorkspace = list.find(w => w.id === lastId) ?? list[0];
       console.log('fuck open');
+      // open pageId to workspaces
+      // to workspace/index.tsx
       openPage(openWorkspace.id, defaultIndexRoute, RouteLogic.REPLACE);
     }
   }, [

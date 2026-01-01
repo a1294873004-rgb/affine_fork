@@ -209,6 +209,7 @@ export class AffineDragHandleWidget extends WidgetComponent<RootBlockModel> {
       dots: isGfx ? true : false,
     };
 
+    console.log("fuck drag handle")
     return html`
       <div class="affine-drag-handle-widget">
         <div class="affine-drag-handle-container">

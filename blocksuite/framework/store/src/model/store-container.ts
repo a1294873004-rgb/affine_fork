@@ -19,6 +19,7 @@ export class StoreContainer {
     extensions,
     id,
   }: GetStoreOptions = {}) => {
+    console.log("fuck getStore ")
     let idOrOptions: string | { readonly?: boolean; query?: Query };
     if (readonly || query) {
       idOrOptions = { readonly, query };
